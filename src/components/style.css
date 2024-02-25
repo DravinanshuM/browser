@@ -1,0 +1,11 @@
+.list-group-item {
+    border-color: #ddd;
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item:hover .mb-1, .list-group-item:hover small {
+    color: #1a0dab; /* Google blue color */
+}

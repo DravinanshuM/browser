@@ -1,25 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Registration from './components/Authentication/Registration.jsx';
+import Login from './components/Authentication/Login.jsx';
+import PageNotFound from './components/Authentication/PageNotFound.jsx';
+import Browser from './components/Browser.jsx';
+import { useState, createContext } from 'react';
+
+// Create context.
+const MyContext = createContext();
 
 function App() {
+  const [registrationData, setRegistrationData] = useState('');
+  const [userAuthentication, setUserAuthentication] = useState(false);
+  
+  // For registration data.
+  const handleFromRegistration = (data) => {
+      // console.log(data);
+      setRegistrationData(data);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <MyContext.Provider value={registrationData}>
+        <Routes>
+          <Route path="/" element={<Registration registrationForm={handleFromRegistration} />} />
+          <Route path="/login" element={<Login setUserAuthentication={setUserAuthentication} />} /> 
+          <Route path="/browser" element={userAuthentication ? <Browser setUserAuthentication={setUserAuthentication} /> : <Navigate to="/login" />} />
+          <Route path="/*" element={<PageNotFound />} />
+        </Routes>
+      </MyContext.Provider>
+    </BrowserRouter>
   );
 }
 
 export default App;
+export { MyContext };
