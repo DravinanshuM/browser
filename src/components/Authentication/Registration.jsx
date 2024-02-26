@@ -130,20 +130,20 @@ const Registration = ({ registrationForm }) => {
 }
 
   return (
-      <div className='container mt-3 mb-5'>
+      <div className='container-fluid registration-body'>
          <div className='row mb-3'>
             <div className='col-lg-12 col-md-12 col-12 text-center'>
-                <h2 className='text-white'>
+                <h2 className='text-white mt-4'>
                    <span className="badge text-bg-secondary mx-3 fs-2">OpenBrowser</span>
                 </h2>
                 <p className='text-white fs-6'>This is a Search Engine openBrowser</p>
             </div>
          </div>
-         <div className='row '>
+         <div className='row mx-5'>
             <div className='col-lg-6 col-md-4 col-12'>
               <div id="box"></div>
             </div>
-            <div className='col-lg-6 col-md-8 col-12 custom p-4'>
+            <div className='col-lg-6 col-md-8 col-12 custom p-4 mb-4'>
               <form onSubmit={submitHandler}>
                 <h3 className='text-center'>User Registration</h3>
                 <div className="mb-3">

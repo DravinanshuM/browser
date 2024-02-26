@@ -1,11 +1,49 @@
-.list-group-item {
-    border-color: #ddd;
+.font-icons {
+    position: relative;
+    top: 0px;
+    right: 120px;
 }
 
-.list-group-item:hover {
-    background-color: #f8f9fa;
+.font-icons2 {
+    position: relative;
+    right: 100px;
 }
 
-.list-group-item:hover .mb-1, .list-group-item:hover small {
-    color: #1a0dab; /* Google blue color */
+/* search engine result design*/
+.search-result {
+    padding: 20px;
+    margin-bottom: 20px;
 }
+
+.seperate-result {
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.seperate-result:hover {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.result-link {
+    text-decoration: none;
+    color: #1a0dab; /* Google search link color */
+}
+.result-thumbnail {
+    max-width: 150px;
+    height: auto;
+}
+.result-title {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #0a0a0a; /* Google search title color */
+}
+.result-url {
+    color: #303131; /* Google search URL color */
+}
+.result-description {
+    color: #545454; /* Google search description color */
+}
+
+
+

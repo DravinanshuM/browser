@@ -16,6 +16,7 @@ const Login = ({ setUserAuthentication }) => {
    
 
   const registrationData = useContext(MyContext);
+  console.log(registrationData);
 
   useEffect(() => {
     // Check if user is already authenticated
@@ -116,7 +117,7 @@ const Login = ({ setUserAuthentication }) => {
 
   return (
      <div className='container mt-5'>
-        <div className='row justify-content-center p-3'>
+        <div className='row justify-content-center p-4'>
            <div className='col-lg-6 col-md-8 col-12 bg-white p-4 border rounded'>
               <form onSubmit={handleSubmit} >
                 <h3 className='text-center'>Login</h3>
