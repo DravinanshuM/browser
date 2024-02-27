@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import LOGO from '../assets/logo-2.png';
 import { Link,  useNavigate} from 'react-router-dom';
 
@@ -19,15 +19,6 @@ const Browser = ({ setUserAuthentication, ParentQuery }) => {
         // Navigate to the login page or any other appropriate page
         navigate('/login');
     };
-
-    useEffect(() => {
-        // Check if user is already authenticated
-        const isAuthenticated = localStorage.getItem('isAuthenticated');
-        if (isAuthenticated) {
-          setUserAuthentication(true);
-          navigate('/browser');
-        }
-      }, [setUserAuthentication, navigate]);
 
     // for input handle change.
     const handleChange = (e) => {
