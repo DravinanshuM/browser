@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LOGO from '../assets/logo-2.png';
+import OPEN from '../assets/open.png';
 import './style.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -46,8 +47,23 @@ const searchFunction = async() => {
 const Search = () => {
   searchFunction();
 }
+
+// useEffcet.
+useEffect(() => {
+  if (searchQuery) {
+    axios.get(`https://www.googleapis.com/customsearch/v1?key=${api_key}&cx=${id}&q=${searchQuery}`)
+      .then((response) => {
+        console.log(response.data);
+        setAboutData(response.data);
+      })
+      .catch((error) => {
+        console.log("ERROR :: ", error.message);
+      });
+  }
+}, [searchQuery, api_key, id]);
+
     
-// console.log(mainData.title);
+
   return (
     <>
       <div className='container-fluid'>
@@ -97,7 +113,7 @@ const Search = () => {
               </div>
           </div>
         </div>
-        <div className='row  text-center'>
+        <div className='row text-center'>
           <div className='col-lg-8 col-md-8 col-12 p-4'>
             <p className='fs-6'> 
               {aboutData ? `${aboutData.context.title.toUpperCase()}, About ${aboutData.searchInformation.formattedTotalResults} Results (${aboutData.searchInformation.formattedSearchTime} seconds)` : ''}
@@ -115,17 +131,18 @@ const Search = () => {
                            <div key={index} className='seperate-result'>
                                <div className="row align-items-center mb-2">
                                   <div className="col-lg-1 col-md-1 col-12">
-                                      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgBAMAAACBVGfHAAAAKlBMVEX/mTP/u3f////S0uqEhMaMjMq1tdzOzui0tNyTk82Vlc1UVK9hsFoSiAfVW9AIAAAAQUlEQVR4AWMYOkAQDTAoQYCyEZQBE3ANQRVQS69IQhHQNHGehCKglb1tEYYAfi1q7RVJOKzFdNgZNMBwFw0MWgEAC2Kz+S0+y7YAAAAASUVORK5CYII=" alt="National Portal of India" className="result-thumbnail img-fluid rounded mx-2" />
+                                      <img src={value.pagemap && value.pagemap.cse_image && value.pagemap.cse_image[0] && value.pagemap.cse_image[0].src ? value.pagemap && value.pagemap.cse_image && value.pagemap.cse_image[0] && value.pagemap.cse_image[0].src : OPEN} alt="National Portal of India" 
+                                      className="result-thumbnail img-fluid rounded mx-2" />
                                   </div>
                                   <div className="col-lg-5 col-md-5 col-12">
                                       <div className="result-title">{value.title}</div>
-                                      <Link to="https://www.indiaNationalPortal.com" className="result-url text-decoration-none">{value.displayLink}</Link>
+                                      <Link to={value.formattedUrl} className="result-url text-decoration-none" target='_blank'>{value.displayLink}</Link>
                                   </div>
                                </div>
                               <div className="row">
                                   <div className="col-lg-12 col-md-12 col-12">
                                       <h5 className='text-justify'>
-                                        <Link to="">{value.htmlTitle}</Link>
+                                        <Link to={value.formattedUrl} target='_blank'>{value.formattedUrl}</Link>
                                         </h5>
                                   </div>
                                   <div className="col-lg-12 col-md-12 col-12">

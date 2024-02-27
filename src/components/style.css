@@ -30,7 +30,7 @@
     color: #1a0dab; /* Google search link color */
 }
 .result-thumbnail {
-    max-width: 150px;
+    max-width: 50px;
     height: auto;
 }
 .result-title {

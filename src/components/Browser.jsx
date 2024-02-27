@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LOGO from '../assets/logo-2.png';
 import { Link,  useNavigate} from 'react-router-dom';
-import axios from 'axios';
 
 const Browser = ({ setUserAuthentication, ParentQuery }) => {
 
@@ -9,8 +8,6 @@ const Browser = ({ setUserAuthentication, ParentQuery }) => {
     const name = localStorage.getItem('name');
     const email = localStorage.getItem('email');
     const [inputData, setInputData] = useState(null);
-    const api_key = process.env.REACT_APP_GOOGLE_API_KEY;
-    const id = process.env.REACT_APP_GOOGLE_SEARCH_ENGINE_ID;
 
     const handleLogout = () => {
         // Remove isAuthenticated flag from localStorage
@@ -23,26 +20,24 @@ const Browser = ({ setUserAuthentication, ParentQuery }) => {
         navigate('/login');
     };
 
+    useEffect(() => {
+        // Check if user is already authenticated
+        const isAuthenticated = localStorage.getItem('isAuthenticated');
+        if (isAuthenticated) {
+          setUserAuthentication(true);
+          navigate('/browser');
+        }
+      }, [setUserAuthentication, navigate]);
+
     // for input handle change.
     const handleChange = (e) => {
         setInputData(e.target.value);
-    }
-
-    // for search function.
-    const searchFunction = async() => {
-        try {
-         const result =  await axios.get(`https://www.googleapis.com/customsearch/v1?key=${api_key}&cx=${id}&q=${inputData}`);
-         console.log(result.data);
-        } catch (error) {
-          console.log("ERROR :: ", error.message);
-        }
     }
 
     // for click function.
     const handleClick = () => {
         ParentQuery(inputData);
         if(inputData) {
-            searchFunction();
             navigate('/search');
         }
     }
